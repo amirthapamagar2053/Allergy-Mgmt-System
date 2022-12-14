@@ -5,6 +5,23 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   primary: { main: "#2ecc71" },
   secondary: { main: "#102b7b" },
+  text: {
+    main: [
+      "MarkOT",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "avenir next",
+      "avenir",
+      "helvetica neue",
+      "helvetica",
+      "Ubuntu",
+      "roboto",
+      "noto",
+      "segoe ui",
+      "arial",
+      "sans-serif",
+    ],
+  },
 });
 
 const App = () => (

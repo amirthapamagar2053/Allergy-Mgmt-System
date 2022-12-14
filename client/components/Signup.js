@@ -10,17 +10,22 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@emotion/react";
+import { signUp } from "../services/signupServices";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
-    console.log("handlesubmit entere");
+    console.log("handlesubmit entered");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const newUser = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+    signUp(newUser);
+    navigate("/");
   };
 
   return (
@@ -82,7 +87,7 @@ export default function SignUp() {
         </Box>
         <Link to="/">
           <Typography sx={{ color: `${theme.secondary.main}` }}>
-            {"Don't have an account? Sign Up"}
+            {"Already have an account? Sign in"}
           </Typography>
         </Link>
       </Box>

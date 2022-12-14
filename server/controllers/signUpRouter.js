@@ -4,7 +4,10 @@ const bcrypt = require("bcryptjs");
 const logger = require("../utils/logger");
 
 signUpRouter.post("/", async (req, res) => {
+  console.log("the signuprouter enetered");
   try {
+    console.log("the try enetered");
+
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -19,6 +22,7 @@ signUpRouter.post("/", async (req, res) => {
       email,
       password: passwordHash,
     });
+    // console.log("the newUser is", newUser);
 
     const savedUser = await newUser.save();
 

@@ -9,20 +9,27 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+import { signIn } from "../services/signinServices";
 
 export default function SignInSide() {
   const theme = useTheme();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+    signIn(user);
   };
 
   return (
-    <Grid container sx={{ height: "100vh" }}>
+    <Grid
+      container
+      sx={{
+        height: "100vh",
+      }}
+    >
       <CssBaseline />
       <Grid
         item
@@ -30,7 +37,9 @@ export default function SignInSide() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random)",
+          backgroundImage:
+            "url(https://cdn.dribbble.com/users/894913/screenshots/2274255/logo_lf.jpg)",
+          backgroundRepeat: "no-repeat",
         }}
       />
       <Grid item xs={12} sm={8} md={5}>
@@ -46,7 +55,11 @@ export default function SignInSide() {
           <Avatar sx={{ m: 1, bgcolor: theme.primary.main }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography
+            component="h1"
+            variant="h5"
+            sx={{ fontFamily: `${theme.text.main}` }}
+          >
             Sign in
           </Typography>
           <Box
@@ -92,7 +105,13 @@ export default function SignInSide() {
             </Button>
           </Box>
           <Link to="/Signup">
-            <Typography sx={{ color: `${theme.secondary.main}` }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: `${theme.secondary.main}`,
+                fontFamily: `${theme.text.main}`,
+              }}
+            >
               {"Don't have an account? Sign Up"}
             </Typography>
           </Link>

@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const loginRouter = require("expresss").Router();
+const loginRouter = require("express").Router();
 const config = require("../utils/config");
 
 loginRouter.post("/", async (req, res) => {
@@ -28,3 +28,5 @@ loginRouter.post("/", async (req, res) => {
 
   res.status(200).send({ token, email: existingUser.email });
 });
+
+module.exports = loginRouter;
