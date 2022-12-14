@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useTheme } from "@emotion/react";
-import { signUp } from "../services/signupServices";
+import signupServices from "../services/signupServices";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
@@ -24,7 +24,8 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    signUp(newUser);
+
+    signupServices.signUp(newUser);
     navigate("/");
   };
 

@@ -32,4 +32,13 @@ signUpRouter.post("/", async (req, res) => {
   }
 });
 
+signUpRouter.get("/", async (req, res) => {
+  try {
+    const users = User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = signUpRouter;

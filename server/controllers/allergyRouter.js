@@ -1,18 +1,21 @@
 const allergyRouter = require("express").Router();
 const Allergy = require("../models/allergy");
+
 allergyRouter.get("/", async (req, res) => {
   const allergies = await Allergy.find({});
   res.status(200).json(allergies);
 });
 
-allergyRouter.post("/allergies", async (req, res) => {
+allergyRouter.post("/", async (req, res) => {
+  console.log("the post entered");
   const { name, symptoms, severity } = req.body;
 
   if ((name || symptoms || severity) === undefined) {
     return res.status(400).json({ error: "content missing" });
   }
 
-  const repeatedAllergy = Allergy.findOne(name);
+  const repeatedAllergy = await Allergy.findOne({ name });
+  console.log("the repeatedALlergy is", repeatedAllergy);
   if (repeatedAllergy) {
     return res.status(400).json({ error: "The allergy exists" });
   }
@@ -23,7 +26,7 @@ allergyRouter.post("/allergies", async (req, res) => {
     severity,
   });
 
-  newallergy.save();
+  await newallergy.save();
   res.status(201).json(newallergy);
 });
 
@@ -57,3 +60,5 @@ allergyRouter.delete("/:email", async (req, res) => {
     console.log(error);
   }
 });
+
+module.exports = allergyRouter;

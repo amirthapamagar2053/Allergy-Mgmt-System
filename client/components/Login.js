@@ -9,18 +9,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { useTheme } from "@emotion/react";
-import { signIn } from "../services/signinServices";
+import { logUser } from "../reducers/userReducer";
+import { useDispatch } from "react-redux";
 
 export default function SignInSide() {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const user = {
+    const savedUser = {
       email: data.get("email"),
       password: data.get("password"),
     };
-    signIn(user);
+    dispatch(logUser(savedUser));
   };
 
   return (

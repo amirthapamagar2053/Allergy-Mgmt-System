@@ -3,6 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const signUpRouter = require("./controllers/signUpRouter");
 const loginRouter = require("./controllers/loginRouter");
+const allergyRouter = require("./controllers/allergyRouter");
 // const logger = require("./utils/logger");
 // const config = require("./utils/config");
 // const mongoose = require("mongoose");
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(express.static("dist"));
 app.use("/api/Signup", signUpRouter);
 app.use("/api/Signin", loginRouter);
+app.use("/api/allergies", allergyRouter);
 // logger.info("connecting to", config.MONGODB_URI);
 
 // sends index.html
