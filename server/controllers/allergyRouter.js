@@ -2,12 +2,19 @@ const allergyRouter = require("express").Router();
 const Allergy = require("../models/allergy");
 
 allergyRouter.get("/", async (req, res) => {
-  const allergies = await Allergy.find({});
-  res.status(200).json(allergies);
+  console.log("the gety entered");
+  console.log("the req.user", req.user);
+  if (req.user) {
+    const allergies = await Allergy.find({ user: req.user.id });
+    console.log("the allergies", allergies);
+    res.status(200).json(allergies);
+  } else {
+    const allergies = await Allergy.find({});
+    res.status(200).json(allergies);
+  }
 });
 
 allergyRouter.post("/", async (req, res) => {
-  console.log("the post entered");
   const { name, symptoms, severity } = req.body;
 
   if ((name || symptoms || severity) === undefined) {
@@ -15,15 +22,15 @@ allergyRouter.post("/", async (req, res) => {
   }
 
   const repeatedAllergy = await Allergy.findOne({ name });
-  console.log("the repeatedALlergy is", repeatedAllergy);
   if (repeatedAllergy) {
     return res.status(400).json({ error: "The allergy exists" });
   }
 
   const newallergy = new Allergy({
     name,
-    symptoms,
+    symptoms: [symptoms],
     severity,
+    user: req.user.id,
   });
 
   await newallergy.save();

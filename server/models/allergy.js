@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-const symptomsSchema = new mongoose.Schema({
-  symptom: String,
-});
-
 const allergySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  symptoms: { symptomsSchema },
+  symptoms: [String],
   severity: {
     type: String,
     required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

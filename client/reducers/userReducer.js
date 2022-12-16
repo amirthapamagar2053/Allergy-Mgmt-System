@@ -16,7 +16,7 @@ export const logUser = (savedUser) => {
   return async (dispatch) => {
     const user = await signinServices.signIn(savedUser);
     console.log("the user in reducer is", user);
-    localStorage.setItem("loggedInUSer", JSON.stringify(user));
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
     dispatch(setUser(user));
   };
 };

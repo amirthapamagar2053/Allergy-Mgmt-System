@@ -16,10 +16,10 @@ const allergiesSlice = createSlice({
 export const { setAllergy } = allergiesSlice.actions;
 
 export const getAllergy = () => {
-  return async () => {
+  return async (dispatch) => {
     console.log("the dispatach thunk entere");
     const allergies = await allergyServices.getAllUserAllergy();
-    console.log("the allergies are", allergies);
+    dispatch(setAllergy(allergies));
   };
 };
 

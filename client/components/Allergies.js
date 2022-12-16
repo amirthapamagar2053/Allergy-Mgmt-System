@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addAllergy } from "../reducers/allergyReducers";
+import { addAllergy, getAllergy } from "../reducers/allergyReducers";
 // import { useSelector } from "react-redux";
 
 const Allergies = () => {
@@ -16,15 +16,19 @@ const Allergies = () => {
     console.log("teh component", newAllergy);
     dispatch(addAllergy(newAllergy));
   };
+  dispatch(getAllergy());
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input name="name" placeholder="name" />
-        <input name="severity" placeholder="severity" />
-        <input name="symptoms" placeholder="symptoms" />
-      </div>
-      <button type="submit">submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input name="name" placeholder="name" />
+          <input name="severity" placeholder="severity" />
+          <input name="symptoms" placeholder="symptoms" />
+        </div>
+        <button type="submit">submit</button>
+      </form>
+      <h1>Allergies list</h1>
+    </>
   );
 };
 

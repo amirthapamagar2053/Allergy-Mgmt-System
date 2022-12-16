@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import { logUser } from "../reducers/userReducer";
 import { useDispatch } from "react-redux";
+import { getAllergy } from "../reducers/allergyReducers";
 
 export default function SignInSide() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function SignInSide() {
       password: data.get("password"),
     };
     dispatch(logUser(savedUser));
+    dispatch(getAllergy());
   };
 
   return (

@@ -28,7 +28,7 @@ export default function SignUp() {
     signupServices.signUp(newUser);
     navigate("/");
   };
-
+  console.log("the Signup entered");
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
