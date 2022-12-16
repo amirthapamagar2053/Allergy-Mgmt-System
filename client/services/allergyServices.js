@@ -39,4 +39,21 @@ const editUserAllergy = async (id, editedAllergy) => {
   console.log("the response is", response);
   return response.data;
 };
-export default { getAllUserAllergy, addUserAllergy, editUserAllergy };
+
+const deleteUserAllergy = async (id) => {
+  console.log("the services delete allergy entered");
+  const token = JSON.parse(window.localStorage.getItem("loggedInUser")).token;
+  const config = {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
+  console.log("the delete response is", response);
+};
+export default {
+  getAllUserAllergy,
+  addUserAllergy,
+  editUserAllergy,
+  deleteUserAllergy,
+};

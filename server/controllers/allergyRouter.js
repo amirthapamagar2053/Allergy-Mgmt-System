@@ -64,9 +64,10 @@ allergyRouter.put("/:id", async (req, res) => {
   }
 });
 
-allergyRouter.delete("/:email", async (req, res) => {
+allergyRouter.delete("/:id", async (req, res) => {
   try {
-    await Allergy.findByIdAndRemove(req.params.email);
+    console.log("the delete req.params", req.params.id);
+    await Allergy.findByIdAndRemove(req.params.id);
     res.status(204).end();
   } catch (error) {
     console.log(error);

@@ -47,4 +47,13 @@ export const editAllergy = (id, editedAllergy) => {
   };
 };
 
+export const deleteAllergy = (id) => {
+  return async (dispatch) => {
+    console.log("the reducers delete entered");
+    await allergyServices.deleteUserAllergy(id);
+    console.log("the deletedAllergy", deleteAllergy);
+    dispatch(getAllergy());
+  };
+};
+
 export default allergiesSlice.reducer;

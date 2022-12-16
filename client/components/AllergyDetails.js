@@ -1,15 +1,18 @@
 import React from "react";
 import MenuAppBar from "./MenuAppBar";
-import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { Toolbar, Typography, Grid, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
+import { deleteAllergy } from "../reducers/allergyReducers";
 
 const AllergyDetails = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const allergies = useSelector((state) => state.allergies);
   let allergy_name = useParams();
   const selectedAllergies = allergies.find(
@@ -19,6 +22,8 @@ const AllergyDetails = () => {
 
   const handleDelete = () => {
     console.log("the handle delete entered");
+    dispatch(deleteAllergy(selectedAllergies.id));
+    navigate("/AllergyList")
   };
 
   return (
