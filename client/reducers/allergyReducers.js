@@ -35,4 +35,16 @@ export const addAllergy = (newAllergy) => {
   };
 };
 
+export const editAllergy = (id, editedAllergy) => {
+  return async (dispatch) => {
+    console.log("the edfit allergy entered");
+    const changedAllergy = await allergyServices.editUserAllergy(
+      id,
+      editedAllergy
+    );
+    console.log("the changedallergy is", changedAllergy);
+    dispatch(getAllergy());
+  };
+};
+
 export default allergiesSlice.reducer;

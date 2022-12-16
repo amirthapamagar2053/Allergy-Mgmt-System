@@ -26,4 +26,17 @@ const addUserAllergy = async (newAllergy) => {
   console.log("the response data", response.data);
   return response.data;
 };
-export default { getAllUserAllergy, addUserAllergy };
+
+const editUserAllergy = async (id, editedAllergy) => {
+  console.log("the services edit entered");
+  const token = JSON.parse(window.localStorage.getItem("loggedInUser")).token;
+  const config = {
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  };
+  const response = await axios.put(`${baseUrl}/${id}`, editedAllergy, config);
+  console.log("the response is", response);
+  return response.data;
+};
+export default { getAllUserAllergy, addUserAllergy, editUserAllergy };

@@ -37,23 +37,28 @@ allergyRouter.post("/", async (req, res) => {
   res.status(201).json(newallergy);
 });
 
-allergyRouter.put("/:email", async (req, res) => {
+allergyRouter.put("/:id", async (req, res) => {
   try {
-    const { symptoms, severity } = req.body;
-    const selectedAllegy = await Allergy.findOne(req.params.email);
+    console.log("the try entered");
+    const { name, symptoms, severity } = req.body;
+    console.log("the req.body", req.body);
+    console.log("the req.params.id", req.params.id);
+
+    const selectedAllegy = await Allergy.findOne({ id: req.params.id });
     const needToChangeAllergy = {
+      name,
       symptoms: [...selectedAllegy.symptoms, symptoms],
       severity,
     };
 
     const updatedAllergy = await Allergy.findByIdAndUpdate(
-      req.params.email,
+      req.params.id,
       needToChangeAllergy,
       {
         new: true,
       }
     );
-    res.status.apply(203).json(updatedAllergy);
+    res.status(203).json(updatedAllergy);
   } catch (error) {
     console.log(error);
   }

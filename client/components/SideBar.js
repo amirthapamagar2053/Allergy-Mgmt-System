@@ -29,7 +29,7 @@ const SideBar = () => {
       >
         <Box sx={{ justifyContent: "center", display: "flex" }}>
           <Button>
-            <Link to="/OverView">
+            <Link to="/OverView" style={{ textDecoration: "none" }}>
               <Typography component="body1" variant="overline">
                 Overview
               </Typography>
@@ -38,7 +38,7 @@ const SideBar = () => {
         </Box>
         <Box sx={{ justifyContent: "center", display: "flex" }}>
           <Button>
-            <Link to="/AllergyList">
+            <Link to="/AllergyList" style={{ textDecoration: "none" }}>
               <Typography component="body1" variant="overline">
                 Allergy List
               </Typography>
@@ -47,7 +47,7 @@ const SideBar = () => {
         </Box>
         <Box sx={{ justifyContent: "center", display: "flex" }}>
           <Button>
-            <Link to="/ContactUs">
+            <Link to="/ContactUs" style={{ textDecoration: "none" }}>
               <Typography component="body1" variant="overline">
                 Contact us
               </Typography>

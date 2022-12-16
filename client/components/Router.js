@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
+import AllergyDetails from "./AllergyDetails";
 import AllergyForm from "./AllergyForm";
 import AllergyList from "./AllergyList";
 import ContactUs from "./ContactUs";
+import EditAllergyForm from "./EditAllergyForm";
 // import Allergies from "./Allergies";
 import SignInSide from "./Login";
 import MenuAppBar from "./MenuAppBar";
@@ -18,6 +20,8 @@ const Router = () => (
     <Route path="/AllergyList" element={<AllergyList />} />
     <Route path="/ContactUs" element={<ContactUs />} />
     <Route path="/AllergyForm" element={<AllergyForm />} />
+    <Route path="/AllergyLists/:id" element={<AllergyDetails />} />
+    <Route path="/AllergyLists/edit/:id" element={<EditAllergyForm />} />
   </Routes>
 );
 

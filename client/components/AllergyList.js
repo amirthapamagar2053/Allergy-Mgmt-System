@@ -67,7 +67,7 @@ const AllergyList = () => {
             Allergy List
           </Typography>
         </Box>
-        <Link to="/AllergyForm">
+        <Link to="/AllergyForm" style={{ textDecoration: "none" }}>
           <Button variant="contained" sx={{ bgcolor: `${theme.primary.main}` }}>
             <Typography> Add a new Allergy </Typography>
           </Button>
@@ -80,21 +80,33 @@ const AllergyList = () => {
               <StyledTableCell align="center">Allergy Name</StyledTableCell>
               <StyledTableCell align="center">Symptoms</StyledTableCell>
               <StyledTableCell align="center">Severity</StyledTableCell>
+              <StyledTableCell align="center">Actions</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {allergy.map((allergy) => (
-              <StyledTableRow key={allergy.name}>
-                <StyledTableCell align="center">
-                  <Typography variant="h6">{allergy.name}</Typography>
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <Typography variant="h6">{allergy.symptoms}</Typography>
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <Typography variant="h6">{allergy.severity}</Typography>
-                </StyledTableCell>
-              </StyledTableRow>
+              <>
+                <StyledTableRow
+                  key={allergy.name}
+                  component={Link}
+                  to={{ pathname: `/AllergyLists/${allergy.name}` }}
+                  sx={{ textDecoration: "none" }}
+                >
+                  <StyledTableCell align="center">
+                    <Typography variant="h6">{allergy.name}</Typography>
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Typography variant="h6">{allergy.symptoms}</Typography>
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Typography variant="h6">{allergy.severity}</Typography>
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Button>Edit</Button>
+                    <Button>Delete</Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              </>
             ))}
           </TableBody>
         </Table>
