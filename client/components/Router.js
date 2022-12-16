@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import AllergyForm from "./AllergyForm";
 import AllergyList from "./AllergyList";
 import ContactUs from "./ContactUs";
 // import Allergies from "./Allergies";
@@ -16,6 +17,7 @@ const Router = () => (
     <Route path="/OverView" element={<OverView />} />
     <Route path="/AllergyList" element={<AllergyList />} />
     <Route path="/ContactUs" element={<ContactUs />} />
+    <Route path="/AllergyForm" element={<AllergyForm />} />
   </Routes>
 );
 

@@ -17,6 +17,7 @@ import {
 import { useTheme } from "@emotion/react";
 import { Box, styled } from "@mui/system";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,16 +55,23 @@ const AllergyList = () => {
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ display: "flex", m: "8 px" }}>
+        <Box sx={{ display: "flex" }}>
           <Icon
             icon="mdi:allergy"
             style={{ fontSize: "44px", color: `${theme.primary.main}` }}
           />{" "}
-          <Typography variant="h5" sx={{ fontFamily: `${theme.text.main}` }}>
+          <Typography
+            variant="h5"
+            sx={{ fontFamily: `${theme.text.main}`, mt: "10px " }}
+          >
             Allergy List
           </Typography>
         </Box>
-        <Button>Add a new Allergy</Button>
+        <Link to="/AllergyForm">
+          <Button variant="contained" sx={{ bgcolor: `${theme.primary.main}` }}>
+            <Typography> Add a new Allergy </Typography>
+          </Button>
+        </Link>
       </Toolbar>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">

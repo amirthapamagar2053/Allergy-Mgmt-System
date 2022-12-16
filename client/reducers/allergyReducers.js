@@ -10,10 +10,13 @@ const allergiesSlice = createSlice({
       state = action.payload;
       return state;
     },
+    addnewAllergy(state, action) {
+      return [...state, action.payload];
+    },
   },
 });
 
-export const { setAllergy } = allergiesSlice.actions;
+export const { setAllergy, addnewAllergy } = allergiesSlice.actions;
 
 export const getAllergy = () => {
   return async (dispatch) => {
@@ -28,7 +31,7 @@ export const addAllergy = (newAllergy) => {
     console.log("the add allergy entered", newAllergy);
     const newallergy = await allergyServices.addUserAllergy(newAllergy);
     console.log("the new allergy is", newallergy);
-    dispatch(setAllergy(newAllergy));
+    dispatch(addnewAllergy(newAllergy));
   };
 };
 

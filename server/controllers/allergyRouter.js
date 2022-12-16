@@ -28,7 +28,7 @@ allergyRouter.post("/", async (req, res) => {
 
   const newallergy = new Allergy({
     name,
-    symptoms: [symptoms],
+    symptoms: [...Array.from(symptoms.split(","))], //splits the symtomps in string and resolve it in array
     severity,
     user: req.user.id,
   });
