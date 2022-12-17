@@ -12,10 +12,12 @@ import { useTheme } from "@emotion/react";
 import { logUser } from "../reducers/userReducer";
 import { useDispatch } from "react-redux";
 import { getAllergy } from "../reducers/allergyReducers";
+import { useNavigate } from "react-router-dom";
 
 export default function SignInSide() {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +27,7 @@ export default function SignInSide() {
     };
     dispatch(logUser(savedUser));
     dispatch(getAllergy());
+    navigate("/OverView");
   };
 
   return (

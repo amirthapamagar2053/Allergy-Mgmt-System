@@ -6,7 +6,6 @@ import { Toolbar, Typography, Grid, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
-import { Link } from "react-router-dom";
 import { deleteAllergy } from "../reducers/allergyReducers";
 
 const AllergyDetails = () => {
@@ -23,7 +22,11 @@ const AllergyDetails = () => {
   const handleDelete = () => {
     console.log("the handle delete entered");
     dispatch(deleteAllergy(selectedAllergies.id));
-    navigate("/AllergyList")
+    navigate("/AllergyList");
+  };
+
+  const handleEdit = () => {
+    navigate(`/AllergyLists/edit/${selectedAllergies.name}`);
   };
 
   return (
@@ -67,10 +70,17 @@ const AllergyDetails = () => {
           </Grid>
         </Grid>
       </Box>
-      <Link to={{ pathname: `/AllergyLists/edit/${selectedAllergies.name}` }}>
-        <Button> Edit</Button>
-      </Link>
-      <Button onClick={() => handleDelete()}>Delete</Button>
+      <Button variant="outlined" onClick={() => handleEdit()}>
+        {" "}
+        Edit
+      </Button>
+      <Button
+        variant="outlined"
+        onClick={() => handleDelete()}
+        sx={{ m: "10px" }}
+      >
+        Delete
+      </Button>
     </MenuAppBar>
   );
 };

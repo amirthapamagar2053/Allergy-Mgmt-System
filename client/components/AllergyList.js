@@ -16,8 +16,10 @@ import {
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { Box, styled } from "@mui/system";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { deleteAllergy } from "../reducers/allergyReducers";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,8 +45,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AllergyList = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   let allergy = useSelector((state) => state.allergies);
   allergy = allergy ? allergy : [];
+
+  const handleEdit = (allergies_name) => {
+    navigate(`/AllergyLists/edit/${allergies_name}`);
+  };
+
+  const handleDelete = (allergies_id) => {
+    dispatch(deleteAllergy(allergies_id));
+  };
+
   return (
     <MenuAppBar>
       <Toolbar
@@ -102,8 +115,27 @@ const AllergyList = () => {
                     <Typography variant="h6">{allergy.severity}</Typography>
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <Button>Edit</Button>
-                    <Button>Delete</Button>
+                    <Button
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.preventDefault(),
+                          e.stopPropagation(),
+                          handleEdit(allergy.name);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.preventDefault(),
+                          e.stopPropagation(),
+                          handleDelete(allergy.id);
+                      }}
+                      sx={{ m: "10px" }}
+                    >
+                      Delete
+                    </Button>
                   </StyledTableCell>
                 </StyledTableRow>
               </>

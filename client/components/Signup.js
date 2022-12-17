@@ -17,16 +17,14 @@ export default function SignUp() {
   const theme = useTheme();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
-    console.log("handlesubmit entered");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const newUser = {
       email: data.get("email"),
       password: data.get("password"),
     };
-
     signupServices.signUp(newUser);
-    navigate("/");
+    navigate("/Signin");
   };
   console.log("the Signup entered");
   return (
