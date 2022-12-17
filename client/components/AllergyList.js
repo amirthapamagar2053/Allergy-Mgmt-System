@@ -47,11 +47,20 @@ const AllergyList = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let allergy = useSelector((state) => state.allergies);
-  allergy = allergy ? allergy : [];
+  let allergies = useSelector((state) => state.allergies);
+  let allergy = allergies
+    ? [...allergies]
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .sort((a, b) => Number(b.highRisk) - Number(a.highRisk))
+    : [];
+  // allergy = allergy
+  //   ? allergy
+  //       .sort((a, b) => a.name.localeCompare(b.name))
+  //       .sort((a, b) => Number(b.highRisk) - Number(a.highRisk))
+  //   : [];
 
-  const handleEdit = (allergies_name) => {
-    navigate(`/AllergyLists/edit/${allergies_name}`);
+  const handleEdit = (allergy_id) => {
+    navigate(`/AllergyLists/edit/${allergy_id}`);
   };
 
   const handleDelete = (allergies_id) => {
@@ -100,9 +109,9 @@ const AllergyList = () => {
             {allergy.map((allergy) => (
               <>
                 <StyledTableRow
-                  key={allergy.name}
+                  key={allergy.id}
                   component={Link}
-                  to={{ pathname: `/AllergyLists/${allergy.name}` }}
+                  to={{ pathname: `/AllergyLists/${allergy.id}` }}
                   sx={{ textDecoration: "none" }}
                 >
                   <StyledTableCell align="center">
@@ -120,7 +129,7 @@ const AllergyList = () => {
                       onClick={(e) => {
                         e.preventDefault(),
                           e.stopPropagation(),
-                          handleEdit(allergy.name);
+                          handleEdit(allergy.id);
                       }}
                     >
                       Edit

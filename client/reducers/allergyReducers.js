@@ -11,7 +11,8 @@ const allergiesSlice = createSlice({
       return state;
     },
     addnewAllergy(state, action) {
-      return [...state, action.payload];
+      state.push(action.payload);
+      // console.log("the payload", action.payload);
     },
   },
 });

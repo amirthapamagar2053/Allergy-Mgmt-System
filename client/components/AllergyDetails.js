@@ -15,7 +15,7 @@ const AllergyDetails = () => {
   const allergies = useSelector((state) => state.allergies);
   let allergy_name = useParams();
   const selectedAllergies = allergies.find(
-    (allergy) => String(allergy.name) === String(allergy_name.id)
+    (allergy) => String(allergy.id) === String(allergy_name.id)
   );
   console.log("the symptoms", selectedAllergies.symptoms);
 

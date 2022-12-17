@@ -15,7 +15,7 @@ allergyRouter.get("/", async (req, res) => {
 });
 
 allergyRouter.post("/", async (req, res) => {
-  const { name, symptoms, severity } = req.body;
+  const { name, symptoms, severity, highRisk } = req.body;
 
   if ((name || symptoms || severity) === undefined) {
     return res.status(400).json({ error: "content missing" });
@@ -30,6 +30,7 @@ allergyRouter.post("/", async (req, res) => {
     name,
     symptoms: [...Array.from(symptoms.split(","))], //splits the symtomps in string and resolve it in array
     severity,
+    highRisk,
     user: req.user.id,
   });
 

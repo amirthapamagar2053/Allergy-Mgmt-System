@@ -1,13 +1,11 @@
-import { useLocation, Navigate, Outlet } from "react-router";
-import { useSelector } from "react-redux";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 
 const RequireAuth = () => {
   const location = useLocation();
-  const user = useSelector((state) => state.users);
-  return user.length === 0 ? (
+  return localStorage.getItem("loggedInUser") ? (
     <Outlet />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/Signin" state={{ from: location }} replace />
   );
 };
 

@@ -27,7 +27,8 @@ export default function SignInSide() {
     };
     dispatch(logUser(savedUser));
     dispatch(getAllergy());
-    navigate("/OverView");
+    console.log("before navigate");
+    navigate("/");
   };
 
   return (
@@ -97,6 +98,7 @@ export default function SignInSide() {
 
             <Button
               type="submit"
+              // onClick={() => handleSubmit()}
               fullWidth
               variant="contained"
               sx={{

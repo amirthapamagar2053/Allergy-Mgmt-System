@@ -2,7 +2,7 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/api/Allergies";
 
 const getAllUserAllergy = async () => {
-  const token = JSON.parse(window.localStorage.getItem("loggedInUser")).token;
+  const token = JSON.parse(window.localStorage.getItem("loggedInUser"))?.token;
   const config = {
     headers: {
       Authorization: `bearer ${token}`,

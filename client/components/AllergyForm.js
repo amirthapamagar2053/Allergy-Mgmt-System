@@ -1,28 +1,39 @@
 import { useTheme } from "@emotion/react";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Checkbox, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import MenuAppBar from "./MenuAppBar";
 import { Icon } from "@iconify/react";
 import { useDispatch } from "react-redux";
 import { addAllergy } from "../reducers/allergyReducers";
+import { useNavigate } from "react-router";
 
 const AllergyForm = () => {
+  const [checked, setChecked] = useState(false);
   const theme = useTheme();
   const dispatch = useDispatch();
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const newAllergy = {
       name: data.get("name"),
       symptoms: data.get("symptoms"),
       severity: data.get("severity"),
+      highRisk: checked,
     };
+    console.log("the new allergy is", newAllergy);
     dispatch(addAllergy(newAllergy));
+    navigate("/AllergyList");
   };
 
   const handleCancel = () => {
     console.log("the handle cancel entered");
+  };
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
   return (
     <MenuAppBar>
@@ -75,7 +86,15 @@ const AllergyForm = () => {
             type="symptoms"
             id="symptoms"
           />
-
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Checkbox
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+              value
+            />
+            <Typography>High Risk</Typography>
+          </Box>
           <Button
             type="submit"
             fullWidth

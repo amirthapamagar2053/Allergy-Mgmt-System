@@ -15,8 +15,8 @@ const EditAllergyForm = () => {
   const allergies = useSelector((state) => state.allergies);
   const allergy_name = useParams();
   const theme = useTheme();
-  const selectedAllergies = allergies.find(
-    (allergy) => String(allergy.name) === String(allergy_name.id)
+  const selectedAllergies = allergies?.find(
+    (allergy) => String(allergy.id) === String(allergy_name.id)
   );
   const [name, setName] = useState(selectedAllergies.name);
   const [symptoms, setSymptoms] = useState(selectedAllergies.symptoms);
@@ -34,7 +34,7 @@ const EditAllergyForm = () => {
     console.log("the editallergy is", editedAllergy);
 
     dispatch(editAllergy(selectedAllergies.id, editedAllergy));
-    navigate("/Allergies");
+    navigate("/AllergyList");
   };
   const handleCancel = () => {};
   return (

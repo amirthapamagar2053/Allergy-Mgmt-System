@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Router from "./components/Router";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./reducers/userReducer";
 import { getAllergy } from "./reducers/allergyReducers";
 
@@ -30,14 +30,16 @@ const theme = createTheme({
 const App = () => {
   console.log("the app entered");
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.users);
   useEffect(() => {
     console.log("the app usefeefct entered");
 
-    if (localStorage.getItem("loggedInUser")) {
+    if (user !== null) {
+      console.log("the useffect if entered");
       dispatch(setUser(JSON.parse(localStorage.getItem("loggedInUser"))));
       dispatch(getAllergy());
     }
-  }, [dispatch]);
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>

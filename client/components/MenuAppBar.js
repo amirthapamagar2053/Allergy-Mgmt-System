@@ -13,10 +13,10 @@ const MenuAppBar = ({ children }) => {
         }}
       >
         <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} xl={2}>
+        <Grid item xs={false} sm={4} md={2} xl={2}>
           <SideBar />
         </Grid>
-        <Grid item xs={false} sm={4} md={7} xl={10}>
+        <Grid item xs={false} sm={4} md={10} xl={10}>
           {children}
         </Grid>
       </Grid>
