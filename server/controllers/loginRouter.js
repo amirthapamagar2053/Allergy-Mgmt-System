@@ -6,8 +6,14 @@ const config = require("../utils/config");
 
 loginRouter.post("/", async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email or password is missing" });
+  }
 
   const existingUser = await User.findOne({ email });
+  if (!existingUser) {
+    return res.status(400).json({ error: "Email doesnot exists" });
+  }
 
   const passwordCorrect =
     existingUser === null
@@ -15,8 +21,8 @@ loginRouter.post("/", async (req, res) => {
       : await bcrypt.compare(password, existingUser.password);
 
   if (!(existingUser && passwordCorrect)) {
-    return res.status(401).json({
-      error: "invalid username or password",
+    return res.status(400).json({
+      error: "invalid password",
     });
   }
 
