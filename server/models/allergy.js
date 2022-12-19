@@ -5,6 +5,12 @@ const allergySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  allergyImg: {
+    type: Object,
+    required: false,
+    default:
+      "https://res.cloudinary.com/dqgzhdegr/image/upload/v1670768602/images_1_io352m.jpg",
+  },
   symptoms: [String],
   severity: {
     type: String,

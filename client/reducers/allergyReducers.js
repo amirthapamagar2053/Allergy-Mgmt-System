@@ -11,8 +11,7 @@ const allergiesSlice = createSlice({
       return state;
     },
     addnewAllergy(state, action) {
-      state.push(action.payload);
-      // console.log("the payload", action.payload);
+      return [...state, action.payload];
     },
   },
 });
@@ -21,7 +20,6 @@ export const { setAllergy, addnewAllergy } = allergiesSlice.actions;
 
 export const getAllergy = () => {
   return async (dispatch) => {
-    console.log("the dispatach thunk entere");
     const allergies = await allergyServices.getAllUserAllergy();
     dispatch(setAllergy(allergies));
   };
@@ -29,16 +27,13 @@ export const getAllergy = () => {
 
 export const addAllergy = (newAllergy) => {
   return async (dispatch) => {
-    console.log("the add allergy entered", newAllergy);
     const newallergy = await allergyServices.addUserAllergy(newAllergy);
-    console.log("the new allergy is", newallergy);
-    dispatch(addnewAllergy(newAllergy));
+    dispatch(addnewAllergy(newallergy));
   };
 };
 
 export const editAllergy = (id, editedAllergy) => {
   return async (dispatch) => {
-    console.log("the edfit allergy entered");
     const changedAllergy = await allergyServices.editUserAllergy(
       id,
       editedAllergy
@@ -50,7 +45,6 @@ export const editAllergy = (id, editedAllergy) => {
 
 export const deleteAllergy = (id) => {
   return async (dispatch) => {
-    console.log("the reducers delete entered");
     await allergyServices.deleteUserAllergy(id);
     console.log("the deletedAllergy", deleteAllergy);
     dispatch(getAllergy());

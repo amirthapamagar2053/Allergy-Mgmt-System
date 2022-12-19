@@ -14,13 +14,14 @@ const AllergyDetails = () => {
   const navigate = useNavigate();
   const allergies = useSelector((state) => state.allergies);
   let allergy_name = useParams();
+  if (allergies === null) {
+    return null;
+  }
   const selectedAllergies = allergies.find(
     (allergy) => String(allergy.id) === String(allergy_name.id)
   );
-  console.log("the symptoms", selectedAllergies.symptoms);
 
   const handleDelete = () => {
-    console.log("the handle delete entered");
     dispatch(deleteAllergy(selectedAllergies.id));
     navigate("/AllergyList");
   };
@@ -55,7 +56,10 @@ const AllergyDetails = () => {
       <Box>
         <Grid container>
           <Grid item xs={false} sm={4} md={7} xl={2}>
-            <Box>Hello world</Box>
+            <Box>
+              {" "}
+              <img src={selectedAllergies.allergyImg} alt="allergyimage" />
+            </Box>
           </Grid>
           <Grid item xs={false} sm={4} md={7} xl={6}>
             <Box>
@@ -66,6 +70,10 @@ const AllergyDetails = () => {
                   <Typography>{symptom}</Typography>
                 </Box>
               ))}
+              <Typography>
+                High Risk : {String(selectedAllergies.highRisk)}
+              </Typography>
+              <Typography>Severity : {selectedAllergies.severity}</Typography>
             </Box>
           </Grid>
         </Grid>

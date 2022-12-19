@@ -13,6 +13,7 @@ const AllergyForm = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ const AllergyForm = () => {
       symptoms: data.get("symptoms"),
       severity: data.get("severity"),
       highRisk: checked,
+      allergyImg: image,
     };
     console.log("the new allergy is", newAllergy);
     dispatch(addAllergy(newAllergy));
@@ -34,6 +36,17 @@ const AllergyForm = () => {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const Reader = new FileReader();
+    Reader.readAsDataURL(file);
+    Reader.onload = () => {
+      if (Reader.readyState === 2) {
+        setImage(Reader.result);
+      }
+    };
   };
   return (
     <MenuAppBar>
@@ -95,6 +108,14 @@ const AllergyForm = () => {
             />
             <Typography>High Risk</Typography>
           </Box>
+          <Typography variant="h6"> Select An Image for Allergy</Typography>
+          <input
+            type="file"
+            id="fileInput"
+            onChange={(e) => handleImageChange(e)}
+            required
+            accept="image/png,image/jpeg"
+          />
           <Button
             type="submit"
             fullWidth

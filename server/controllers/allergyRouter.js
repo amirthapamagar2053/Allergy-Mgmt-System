@@ -1,5 +1,12 @@
 const allergyRouter = require("express").Router();
 const Allergy = require("../models/allergy");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dilyevrzy",
+  api_key: "311774849752374",
+  api_secret: "2atP418TqwMBD5PC9GcP8NHV0BI",
+});
 
 allergyRouter.get("/", async (req, res) => {
   if (req.user) {
@@ -16,6 +23,7 @@ allergyRouter.get("/", async (req, res) => {
 
 allergyRouter.post("/", async (req, res) => {
   const { name, symptoms, severity, highRisk } = req.body;
+  console.log("the req.body is", req.body.allergyImg);
   const repeatedAllergy = await Allergy.findOne({ name: req.body.name });
 
   if (repeatedAllergy) {
@@ -26,13 +34,30 @@ allergyRouter.post("/", async (req, res) => {
     return res.status(400).json({ error: "content missing" });
   }
 
+  console.log("the req files", req.body.allergyImg);
+
+  if (req.body.allergyImg) {
+    const uploadedResponse = await cloudinary.uploader.upload(
+      req.body.allergyImg,
+      {
+        width: 200,
+        height: 200,
+        crop: "fill",
+      }
+    );
+    req.body.allergyImg = uploadedResponse.secure_url;
+  }
+
   const newallergy = new Allergy({
     name,
     symptoms: [...Array.from(symptoms.split(","))], //splits the symtomps in string and resolve it in array
     severity,
     highRisk,
     user: req.user.id,
+    allergyImg: req.body.allergyImg ? req.body.allergyImg : null,
   });
+
+  // console.log("the else new allergy is", newallergy);
 
   await newallergy.save();
   res.status(201).json(newallergy);

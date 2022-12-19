@@ -53,11 +53,6 @@ const AllergyList = () => {
         .sort((a, b) => a.name.localeCompare(b.name))
         .sort((a, b) => Number(b.highRisk) - Number(a.highRisk))
     : [];
-  // allergy = allergy
-  //   ? allergy
-  //       .sort((a, b) => a.name.localeCompare(b.name))
-  //       .sort((a, b) => Number(b.highRisk) - Number(a.highRisk))
-  //   : [];
 
   const handleEdit = (allergy_id) => {
     navigate(`/AllergyLists/edit/${allergy_id}`);
@@ -70,7 +65,7 @@ const AllergyList = () => {
   return (
     <MenuAppBar>
       <Toolbar
-        fullwidth
+        fullwidth="true"
         sx={{
           display: "flex",
           height: 150,
