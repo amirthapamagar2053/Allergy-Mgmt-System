@@ -137,6 +137,7 @@ const AllergyList = () => {
                           handleDelete(allergy.id);
                       }}
                       sx={{ m: "10px" }}
+                      color="error"
                     >
                       Delete
                     </Button>
