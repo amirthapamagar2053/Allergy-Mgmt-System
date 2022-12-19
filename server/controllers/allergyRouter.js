@@ -57,14 +57,14 @@ allergyRouter.post("/", async (req, res) => {
 
 allergyRouter.put("/:id", async (req, res) => {
   try {
-    const { name, symptoms, severity, highRisk } = req.body;
+    const { name, symptoms, severity, highRisk, allergyImg } = req.body;
 
-    const selectedAllegy = await Allergy.findOne({ id: req.params.id });
     const needToChangeAllergy = {
       name,
-      symptoms: [...selectedAllegy.symptoms, symptoms],
+      symptoms: [...Array.from(symptoms.split(","))],
       severity,
       highRisk,
+      allergyImg,
     };
 
     const updatedAllergy = await Allergy.findByIdAndUpdate(
