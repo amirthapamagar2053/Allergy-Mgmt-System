@@ -10,12 +10,9 @@ cloudinary.config({
 
 allergyRouter.get("/", async (req, res) => {
   if (req.user) {
-    console.log("the if entered");
     const allergies = await Allergy.find({ user: req.user.id });
-    console.log("the allergies", allergies);
     res.status(200).json(allergies);
   } else {
-    console.log("the else entered");
     const allergies = await Allergy.find({});
     res.status(200).json(allergies);
   }
@@ -23,7 +20,6 @@ allergyRouter.get("/", async (req, res) => {
 
 allergyRouter.post("/", async (req, res) => {
   const { name, symptoms, severity, highRisk } = req.body;
-  console.log("the req.body is", req.body.allergyImg);
   const repeatedAllergy = await Allergy.findOne({ name: req.body.name });
 
   if (repeatedAllergy) {
@@ -63,10 +59,7 @@ allergyRouter.post("/", async (req, res) => {
 
 allergyRouter.put("/:id", async (req, res) => {
   try {
-    console.log("the try entered");
     const { name, symptoms, severity, highRisk } = req.body;
-    console.log("the req.body", req.body);
-    console.log("the req.params.id", req.params.id);
 
     const selectedAllegy = await Allergy.findOne({ id: req.params.id });
     const needToChangeAllergy = {
@@ -91,7 +84,6 @@ allergyRouter.put("/:id", async (req, res) => {
 
 allergyRouter.delete("/:id", async (req, res) => {
   try {
-    console.log("the delete req.params", req.params.id);
     await Allergy.findByIdAndRemove(req.params.id);
     res.status(204).end();
   } catch (error) {
