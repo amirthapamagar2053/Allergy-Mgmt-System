@@ -1,5 +1,5 @@
 import { useTheme } from "@emotion/react";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Checkbox, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import MenuAppBar from "./MenuAppBar";
@@ -13,15 +13,18 @@ const EditAllergyForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allergies = useSelector((state) => state.allergies);
+  allergies ? allergies : null;
+
   const allergy_name = useParams();
   const theme = useTheme();
   const selectedAllergies = allergies?.find(
     (allergy) => String(allergy.id) === String(allergy_name.id)
   );
-  const [name, setName] = useState(selectedAllergies.name);
-  const [symptoms, setSymptoms] = useState(selectedAllergies.symptoms);
-
-  const [severity, setSeverity] = useState(selectedAllergies.severity);
+  const [name, setName] = useState(selectedAllergies?.name);
+  const [symptoms, setSymptoms] = useState(selectedAllergies?.symptoms);
+  const [severity, setSeverity] = useState(selectedAllergies?.severity);
+  const [image, setImage] = useState(selectedAllergies?.allergyImg);
+  const [checked, setChecked] = useState(selectedAllergies?.highRisk);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,11 +33,28 @@ const EditAllergyForm = () => {
       name: data.get("name"),
       severity: data.get("severity"),
       symptoms: data.get("symptoms"),
+      highRisk: checked,
+      allergyImg: image,
     };
     console.log("the editallergy is", editedAllergy);
 
     dispatch(editAllergy(selectedAllergies.id, editedAllergy));
     navigate("/AllergyList");
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const Reader = new FileReader();
+    Reader.readAsDataURL(file);
+    Reader.onload = () => {
+      if (Reader.readyState === 2) {
+        setImage(Reader.result);
+      }
+    };
+  };
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
   const handleCancel = () => {};
   return (
@@ -97,6 +117,26 @@ const EditAllergyForm = () => {
               id="symptoms"
               value={symptoms}
               onChange={(event) => setSymptoms(event.target.value)}
+            />
+
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Checkbox
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ "aria-label": "controlled" }}
+                value
+              />
+              <Typography>High Risk</Typography>
+            </Box>
+
+            <img src={image} alt="allergyimage" />
+            <Typography variant="h6"> Change An Image for Allergy</Typography>
+            <input
+              type="file"
+              id="fileInput"
+              onChange={(e) => handleImageChange(e)}
+              required
+              accept="image/png,image/jpeg"
             />
 
             <Button

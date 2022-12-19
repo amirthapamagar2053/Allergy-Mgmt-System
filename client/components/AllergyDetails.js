@@ -27,7 +27,7 @@ const AllergyDetails = () => {
   };
 
   const handleEdit = () => {
-    navigate(`/AllergyLists/edit/${selectedAllergies.name}`);
+    navigate(`/AllergyLists/edit/${selectedAllergies.id}`);
   };
 
   return (

@@ -30,8 +30,6 @@ allergyRouter.post("/", async (req, res) => {
     return res.status(400).json({ error: "content missing" });
   }
 
-  console.log("the req files", req.body.allergyImg);
-
   if (req.body.allergyImg) {
     const uploadedResponse = await cloudinary.uploader.upload(
       req.body.allergyImg,
