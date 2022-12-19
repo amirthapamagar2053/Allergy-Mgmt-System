@@ -38,4 +38,22 @@ loginRouter.post("/", async (req, res) => {
     .send({ token, email: existingUser.email, id: existingUser.id });
 });
 
+loginRouter.post("/refresh", async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
+    if (!refreshToken) return res.json({ error: "Refresh token is missing!!" });
+    const user = jwt.verify(refreshToken, config.REFRESH_TOKEN_SECRET);
+    const userForToken = {
+      email: user.email,
+      id: user.id,
+    };
+    const accessToken = jwt.sign(userForToken, config.ACCESS_TOKEN_SECRET, {
+      expiresIn: 60 * 60,
+    });
+    res.status(200).json({ accessToken });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = loginRouter;

@@ -37,7 +37,7 @@ beforeEach(async () => {
 });
 
 describe("/api/Allergies", () => {
-  test("return all practitioners", async () => {
+  test("return all allergies", async () => {
     const response = await api
       .get("/api/Allergies")
       .set("authorization", "bearer " + token);
@@ -76,7 +76,7 @@ test("add a allergy", async () => {
   expect(names).toContain("newAllergy3");
 });
 
-test("dont add practitioner if email already exists", async () => {
+test("Don't add the allergy if the name matched", async () => {
   const user = {
     email: "test@gmail.com",
     password: "password",
@@ -102,7 +102,7 @@ test("dont add practitioner if email already exists", async () => {
   expect(response.body.error).toContain("The allergy exists");
 });
 
-test("update a practitioner", async () => {
+test("update the allergy", async () => {
   const user = {
     email: "test@gmail.com",
     password: "password",
@@ -133,7 +133,7 @@ test("update a practitioner", async () => {
   expect(practitionersAtEnd).toHaveLength(2);
 });
 
-test("delete a practitioner", async () => {
+test("delete the allergy", async () => {
   const allAllergy = await Allergy.find({});
   await api
     .delete("/api/Allergies/" + allAllergy[0]._id)

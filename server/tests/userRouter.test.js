@@ -13,7 +13,7 @@ beforeEach(async () => {
   await api.post("/api/Signup").send(newUser);
 }, 10000);
 
-describe("POST /api/users/signup", () => {
+describe("POST for user signup", () => {
   test("Create a new User", async () => {
     const newUser = {
       email: "test1@gmail.com",
@@ -48,23 +48,9 @@ describe("POST /api/users/signup", () => {
       .expect("Content-Type", /application\/json/);
     expect(response.body.error).toContain("Email or password is missing");
   }, 100000);
-
-  // test("new user is not created if email is not valid", async () => {
-  //   const newUser = {
-  //     email: "narayangopal",
-  //     password: "narayangopal123",
-  //   };
-  //   const response = await api
-
-  //     .post("/api/users/signup")
-  //     .send(newUser)
-  //     .expect(400)
-  //     .expect("Content-Type", /application\/json/);
-  //   expect(response.body.error).toContain("Please enter a valid email");
-  // });
 });
 
-describe("POST /api/users/signin", () => {
+describe("POST for user signin", () => {
   test("user is logged in", async () => {
     const user = {
       email: "test@gmail.com",
@@ -76,7 +62,6 @@ describe("POST /api/users/signin", () => {
       .expect(200)
       .expect("Content-Type", /application\/json/);
     expect(response.body.token).toBeDefined();
-    // expect(response.body.refreshToken).toBeDefined();
   });
 
   test("user is not logged in if email or password is missing", async () => {
@@ -116,23 +101,3 @@ describe("POST /api/users/signin", () => {
     expect(response.body.error).toContain("invalid password");
   });
 });
-
-// describe("POST /api/users/refresh-token", () => {
-//   test("refresh token is generated", async () => {
-//     const loggedInUser = await api
-//       .post("/api/users/signin")
-//       .send({
-//         email: "narayangopal@leapfrog.com",
-//         password: "narayangopal123",
-//       })
-//       .expect(200)
-//       .expect("Content-Type", /application\/json/);
-
-//     const response = await api
-//       .post("/api/users/refresh")
-//       .send({ refreshToken: loggedInUser.body.refreshToken })
-//       .expect(200)
-//       .expect("Content-Type", /application\/json/);
-//     expect(response.body.accessToken).toBeDefined();
-//   });
-// });

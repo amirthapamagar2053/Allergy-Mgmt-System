@@ -50,14 +50,12 @@ allergyRouter.post("/", async (req, res) => {
 
   const newallergy = new Allergy({
     name,
-    symptoms: [...Array.from(symptoms.split(","))], //splits the symtomps in string and resolve it in array
+    symptoms: [...Array.from(symptoms.split(","))],
     severity,
     highRisk,
     user: req.user.id,
     allergyImg: req.body.allergyImg ? req.body.allergyImg : null,
   });
-
-  // console.log("the else new allergy is", newallergy);
 
   await newallergy.save();
   res.status(201).json(newallergy);

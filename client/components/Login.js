@@ -18,16 +18,15 @@ export default function SignInSide() {
   const dispatch = useDispatch();
   const theme = useTheme();
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const savedUser = {
       email: data.get("email"),
       password: data.get("password"),
     };
-    dispatch(logUser(savedUser));
-    dispatch(getAllergy());
-    console.log("before navigate");
+    await dispatch(logUser(savedUser));
+    await dispatch(getAllergy());
     navigate("/");
   };
 
