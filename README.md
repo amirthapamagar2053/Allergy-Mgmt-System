@@ -7,6 +7,13 @@ Allergy Management System  is a web application that manages the different aller
 ## API Documentation
 - [Here is API Documention](https://documenter.getpostman.com/view/18127972/2s8YzZPycK)
 
+## User experience walkthrough
+![imagealt](https://res.cloudinary.com/dilyevrzy/image/upload/v1671444675/Signin_y7whuc.png)
+![imagealt](https://res.cloudinary.com/dilyevrzy/image/upload/v1671444675/Signup_pwnqey.png)
+![imagealt](https://res.cloudinary.com/dilyevrzy/image/upload/v1671444675/AllergyList_tfv5wg.png)
+![imagealt](https://res.cloudinary.com/dilyevrzy/image/upload/v1671444675/AddPage_v8k6po.png)
+![imagealt](https://res.cloudinary.com/dilyevrzy/image/upload/v1671444675/AllergyDetails_m0enwd.png)
+![imagealt](https://res.cloudinary.com/dilyevrzy/image/upload/v1671444676/EditPage_pc2wdl.png)
 
 # Technology Stack
 This project is built on ReactJs on frontend and NodeJs with express framework on backend. Database is deployed on mongoDB and for frontend styling Material UI is used. Redux is used for state management. Unit test is done in JEST. Postman is used for design ,build and testing of APIs.
