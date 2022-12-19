@@ -25,7 +25,7 @@ Follow  the installation guide below to setup and run this souce code locally on
  npm install
 
  ```
- ## Install and setup dependencies for production 
+ 
  ```
  and create ``` .env ``` file that has following:
  ```
