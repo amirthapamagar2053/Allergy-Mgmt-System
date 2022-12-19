@@ -2,7 +2,7 @@ import React from "react";
 import MenuAppBar from "./MenuAppBar";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { Toolbar, Typography, Grid, Button } from "@mui/material";
+import { Toolbar, Typography, Grid, Button, Paper } from "@mui/material";
 import { Box } from "@mui/system";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@emotion/react";
@@ -53,31 +53,44 @@ const AllergyDetails = () => {
           </Typography>
         </Box>
       </Toolbar>
-      <Box>
-        <Grid container>
-          <Grid item xs={false} sm={4} md={7} xl={2}>
-            <Box>
-              {" "}
-              <img src={selectedAllergies.allergyImg} alt="allergyimage" />
-            </Box>
-          </Grid>
-          <Grid item xs={false} sm={4} md={7} xl={6}>
-            <Box>
-              <Typography variant="outlined">Symptoms</Typography>
-              {selectedAllergies.symptoms.map((symptom, index) => (
-                <Box key={index} sx={{ display: "flex", alignItems: "center" }}>
-                  <Icon icon="ci:dot-02-s" />
-                  <Typography>{symptom}</Typography>
+      <Paper>
+        <Box>
+          <Grid container>
+            <Grid item xs={false} sm={4} md={7} xl={2}>
+              <Box>
+                {" "}
+                <img src={selectedAllergies.allergyImg} alt="allergyimage" />
+              </Box>
+            </Grid>
+            <Grid item xs={false} sm={4} md={7} xl={6}>
+              <Box sx={{ display: "flex" }} gap={5}>
+                <Box>
+                  <Typography variant="outlined">Symptoms</Typography>
+                  {selectedAllergies.symptoms.map((symptom, index) => (
+                    <Box
+                      key={index}
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Icon icon="ci:dot-02-s" />
+                      <Typography>{symptom}</Typography>
+                    </Box>
+                  ))}
                 </Box>
-              ))}
-              <Typography>
-                High Risk : {String(selectedAllergies.highRisk)}
-              </Typography>
-              <Typography>Severity : {selectedAllergies.severity}</Typography>
-            </Box>
+                <Box>
+                  <Typography>High Risk</Typography>
+                  <Typography>{String(selectedAllergies.highRisk)}</Typography>
+                </Box>
+                <Box>
+                  <Typography>
+                    Severity{" "}
+                    <Typography> {selectedAllergies.severity}</Typography>{" "}
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </Paper>
       <Button variant="outlined" onClick={() => handleEdit()}>
         {" "}
         Edit
@@ -86,6 +99,7 @@ const AllergyDetails = () => {
         variant="outlined"
         onClick={() => handleDelete()}
         sx={{ m: "10px" }}
+        color="error"
       >
         Delete
       </Button>
