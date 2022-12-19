@@ -28,14 +28,10 @@ const theme = createTheme({
 });
 
 const App = () => {
-  console.log("the app entered");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users);
   useEffect(() => {
-    console.log("the app usefeefct entered");
-
     if (user !== null) {
-      console.log("the useffect if entered");
       dispatch(setUser(JSON.parse(localStorage.getItem("loggedInUser"))));
       dispatch(getAllergy());
     }

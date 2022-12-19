@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { Button, Checkbox, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuAppBar from "./MenuAppBar";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,19 +13,27 @@ const EditAllergyForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allergies = useSelector((state) => state.allergies);
-  allergies ? allergies : null;
+  allergies ? allergies : [];
 
   const allergy_name = useParams();
   const theme = useTheme();
   const selectedAllergies = allergies?.find(
     (allergy) => String(allergy.id) === String(allergy_name.id)
   );
-  const [name, setName] = useState(selectedAllergies?.name);
-  const [symptoms, setSymptoms] = useState(selectedAllergies?.symptoms);
-  const [severity, setSeverity] = useState(selectedAllergies?.severity);
-  const [image, setImage] = useState(selectedAllergies?.allergyImg);
-  const [checked, setChecked] = useState(selectedAllergies?.highRisk);
 
+  const [name, setName] = useState("");
+  const [symptoms, setSymptoms] = useState("");
+  const [severity, setSeverity] = useState("");
+  const [image, setImage] = useState("");
+  const [checked, setChecked] = useState("");
+
+  useEffect(() => {
+    setName(selectedAllergies?.name);
+    setSymptoms(selectedAllergies?.symptoms);
+    setSeverity(selectedAllergies?.severity);
+    setImage(selectedAllergies?.allergyImg);
+    setChecked(selectedAllergies?.highRisk);
+  }, [selectedAllergies]);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -36,7 +44,6 @@ const EditAllergyForm = () => {
       highRisk: checked,
       allergyImg: image,
     };
-    console.log("the editallergy is", editedAllergy);
 
     dispatch(editAllergy(selectedAllergies.id, editedAllergy));
     navigate("/AllergyList");
@@ -57,6 +64,7 @@ const EditAllergyForm = () => {
     setChecked(event.target.checked);
   };
   const handleCancel = () => {};
+
   return (
     <div>
       <MenuAppBar>
