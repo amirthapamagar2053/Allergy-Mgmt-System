@@ -1,85 +1,53 @@
-# Fullstack JS boilerplate
+# Allergy Management System
+Allergy Management System  is a web application that manages the different allergies. This app has login/signup feature that alllows user to authenticate and view all the list of allergies added by the user once authenticated. The allergies page can only be accessed by the authenticated user.This app has information of allergies name,symptoms,image and severity. We can add, edit and delete allergers and also we can mark the allergies High Risk. High Risk allergies are arranged alphabetically and shown at the top of the list .
 
-Simple boilerplate
+## Postman Collection
+- [Here is the post man request used in testing API](https://grey-escape-269353.postman.co/workspace/My-Workspace~430de2a1-7b4f-4d2e-8153-5925260ee515/collection/18127972-22a45116-f281-4ef2-9122-bcc02d201216?action=share&creator=18127972)
 
-## design framework
-
-The sass files from [CUBE CSS workshop](https://github.com/TEJ-Fellowship/cube-css-workshop) are now configured into `client/assets/styles`
-
-The `main.scss` is referenced from `client/index.html` as a regular stylesheet link. Parcel knows to automatically parse the scss to css.
-
-## starting frontend and backend concurrently during dev
-
-Running `npm run dev` will run frontend and backend at the same time so that you have develop all code together
+## API Documentation
+- [Here is API Documention](https://documenter.getpostman.com/view/18127972/2s8YzZPycK)
 
 
-# N-MARS-ecom
-## User stories link
-https://docs.google.com/document/d/1M4_FOX6KYEtDL6RO-80DsOg_RZGmLfQUFK6THB1kKRI/edit?usp=sharing
+# Technology Stack
+This project is built on ReactJs on frontend and NodeJs with express framework on backend. Database is deployed on mongoDB and for frontend styling Material UI is used. Redux is used for state management. Unit test is done in JEST. Postman is used for design ,build and testing of APIs.
+
+# Installation
+
+Follow  the installation guide below to setup and run this souce code locally on your device.
+
+## Clone Repo
+ ```
+ git clone https://github.com/amirthapamagar2053/Leapfrog-Allergy-Mgmt-System
+ ```
+ ## Install and setup dependencies for dev
+
+ ```
+ npm install
+
+ ```
+ 
+ ```
+ and create ``` .env ``` file that has following:
+ ```
+ ```
+ PORT='YOUR PORT NO.'
+ MONGODB_URI='YOUR MONGODB URI'
+ MONGODB_URI_TEST= YOUR MONGODB URI FOR TEST
+ ```
+ # Running the Application
+ ## For development
+ Server
+ ```
+ npm run dev:server
+ 
+ ```
+ client
+ ```
+ npm run dev:client
+ ```
 
 
-## DATABASE MODELS
-Customer
-=========================== 
-id
-firstname
-lastname
-pasword
-email
-shipping add //foreign key to shipping address id
 
-Product
-================
-id
-price
-name
-specification
-quantity
-category_id //foreign key to category id
-Brand_id //foreign key to category id
-
-Order History
-=========================
-id
-customer_id //foreign key to customer id
-order-status
-order-date
-
-
-Shopping Cart
-============================
-product_id //foreign key to prodcutid
-customer_id //foreign key to customer id
-quantity
-
-Shipping address
-=============================
-id
-destination address
-
-Category
-======================
-id
-name
-description
-
-Brand
-=========================
-id 
-name
-
-
-Order Item Details
-===============
-id
-order_history_id  //foreign key from order history id
-product_id
-quantity
-price
-
-# Figma design link
-https://www.figma.com/file/k6IUGxTBs9ERitGORJlkWq/SIgnUp-page?node-id=0%3A1
-
-# CUBE-CSS boilerplate code by Barsha Maharjan
-https://github.com/TEJ-Fellowship/cube-css-workshop
-
+ 
+ 
+ 
