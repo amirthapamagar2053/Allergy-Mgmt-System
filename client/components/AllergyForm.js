@@ -31,7 +31,7 @@ const AllergyForm = () => {
   };
 
   const handleCancel = () => {
-    console.log("the handle cancel entered");
+    navigate(-1);
   };
 
   const handleChange = (event) => {

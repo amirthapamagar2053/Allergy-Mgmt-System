@@ -63,7 +63,9 @@ const EditAllergyForm = () => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    navigate(-1);
+  };
 
   return (
     <div>
