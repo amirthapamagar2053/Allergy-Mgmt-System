@@ -22,7 +22,6 @@ Follow  the installation guide below to setup and run this souce code locally on
  ## Install and setup dependencies for dev
 
  ```
- cd server
  npm install
 
  ```
