@@ -18,7 +18,7 @@ Follow  the installation guide below to setup and run this souce code locally on
 
 ## Clone Repo
  ```
- git clone https://github.com/amirthapamagar2053/Leapfrog-Allergy-Mgmt-System
+ git clone https://github.com/amirthapamagar2053/Allergy-Mgmt-System
  ```
  ## Install and setup dependencies for dev
 
